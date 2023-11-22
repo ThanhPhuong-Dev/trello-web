@@ -1,5 +1,6 @@
 
 import { Button } from '@mui/material'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 function App() {
   return (
     <>
@@ -7,6 +8,8 @@ function App() {
       <Button variant="text">Text</Button>
       <Button variant="contained">Contained</Button>
       <Button variant="outlined">Outlined</Button>
+
+      <ShoppingCartIcon></ShoppingCartIcon>
     </>
   )
 }
