@@ -32,12 +32,16 @@ function SelectMode() {
           </div>
         </MenuItem>
         <MenuItem value="dark">
-          <DarkModeOutlinedIcon></DarkModeOutlinedIcon>
-          Dark
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <DarkModeOutlinedIcon></DarkModeOutlinedIcon>
+            Dark
+          </div>
         </MenuItem>
         <MenuItem value="system">
-          <SettingsBrightnessIcon></SettingsBrightnessIcon>
-          System
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <SettingsBrightnessIcon></SettingsBrightnessIcon>
+            System
+          </div>
         </MenuItem>
       </Select>
     </FormControl>
