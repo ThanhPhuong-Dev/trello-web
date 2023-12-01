@@ -12,7 +12,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <CssBaseline></CssBaseline>
       <App />
     </CssVarsProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
-
-
