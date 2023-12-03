@@ -37,7 +37,7 @@ function Avatars() {
           sx={{ width: '30px', height: '30px' }}
         />
       </Button> */}
-      <Tooltip title="Account settings">
+      <Tooltip title="ThanhPhuongDev">
         <IconButton
           onClick={handleClick}
           size="small"
@@ -49,7 +49,7 @@ function Avatars() {
           <Avatar
             alt="Remy Sharp"
             src="https://scontent.fdad1-4.fna.fbcdn.net/v/t1.6435-9/31064309_258390688037005_2079259999468519424_n.jpg?stp=dst-jpg_s851x315&_nc_cat=103&ccb=1-7&_nc_sid=c21ed2&_nc_ohc=P_9CrPk5gYMAX-PtugC&_nc_ht=scontent.fdad1-4.fna&oh=00_AfDrLSG9HIMMEoTDIsS0EaReBlXDt8EBlIgAu_S1cyx0Xg&oe=658FE750"
-            sx={{ width: '30px', height: '30px' }}
+            sx={{ width: '38px', height: '38px' }}
           />
         </IconButton>
       </Tooltip>
@@ -69,7 +69,7 @@ function Avatars() {
               width: 32,
               height: 32,
               ml: -0.5,
-              mr: 1,
+              mr: 1
             },
             '&:before': {
               content: '""',
@@ -81,9 +81,9 @@ function Avatars() {
               height: 10,
               bgcolor: 'background.paper',
               transform: 'translateY(-50%) rotate(45deg)',
-              zIndex: 0,
-            },
-          },
+              zIndex: 0
+            }
+          }
         }}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}

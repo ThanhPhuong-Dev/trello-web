@@ -21,6 +21,7 @@ function Recent() {
   return (
     <div>
       <Button
+        sx={{ color: 'white' }}
         id="basic-button-recent"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
@@ -36,7 +37,7 @@ function Recent() {
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button',
+          'aria-labelledby': 'basic-button'
         }}
       >
         <MenuItem>

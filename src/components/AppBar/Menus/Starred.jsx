@@ -21,6 +21,7 @@ function Starred() {
   return (
     <div>
       <Button
+        sx={{ color: 'white' }}
         id="basic-button-Starred"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
@@ -36,7 +37,7 @@ function Starred() {
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button',
+          'aria-labelledby': 'basic-button'
         }}
       >
         <MenuItem>

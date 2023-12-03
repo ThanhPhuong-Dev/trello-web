@@ -8,6 +8,7 @@ function BoardContent() {
         backgroundColor: 'primary.main',
         display: 'flex',
         alignItems: 'center',
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#0288d1')
       }}
     >
       Content

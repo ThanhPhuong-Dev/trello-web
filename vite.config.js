@@ -7,6 +7,6 @@ export default defineConfig({
   plugins: [react(), svgr()],
 
   resolve: {
-    alias: [{ find: '~', replacement: '/src' }],
-  },
+    alias: [{ find: '~', replacement: '/src' }]
+  }
 });

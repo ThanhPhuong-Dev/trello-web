@@ -25,6 +25,7 @@ function WorkSpaces() {
   return (
     <div>
       <Button
+        sx={{ color: 'white' }}
         id="basic-button-workspaces"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
@@ -40,7 +41,7 @@ function WorkSpaces() {
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button',
+          'aria-labelledby': 'basic-button'
         }}
       >
         <MenuItem>
