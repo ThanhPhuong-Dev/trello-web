@@ -1,17 +1,17 @@
 import Box from '@mui/material/Box';
+import ListColumn from './ListColumn/ListColumn';
 
 function BoardContent() {
   return (
     <Box
       sx={{
-        height: (theme) => `calc( 100vh - ${theme.trello.appBarHeight} - ${theme.trello.boardBarHeight})`,
+        height: (theme) => theme.trello.boardContentHeight,
         backgroundColor: 'primary.main',
-        display: 'flex',
-        alignItems: 'center',
-        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#0288d1')
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#0288d1'),
+        p: '10px 0'
       }}
     >
-      Content
+      <ListColumn></ListColumn>
     </Box>
   );
 }

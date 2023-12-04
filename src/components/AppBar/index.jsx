@@ -7,7 +7,6 @@ import TextField from '@mui/material/TextField';
 import Badge from '@mui/material/Badge';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { SvgIcon, Tooltip, Typography } from '@mui/material';
 import WorkSpaces from './Menus/WorkSpaces';
 import Recent from './Menus/Recent';
@@ -17,6 +16,7 @@ import Avatars from './Menus/Avatar';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import { useState } from 'react';
 function AppBar() {
   const [search, setSearch] = useState('');
@@ -55,7 +55,7 @@ function AppBar() {
                 border: 'none'
               }
             }}
-            startIcon={<AddCircleOutlineIcon></AddCircleOutlineIcon>}
+            startIcon={<LibraryAddIcon></LibraryAddIcon>}
             variant="outlined"
           >
             Create
