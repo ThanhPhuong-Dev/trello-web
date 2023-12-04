@@ -6,28 +6,36 @@ import CardMedia from '@mui/material/CardMedia';
 import GroupIcon from '@mui/icons-material/Group';
 import CommentIcon from '@mui/icons-material/Comment';
 import AttachmentIcon from '@mui/icons-material/Attachment';
-function Cards() {
+function Cards({ card }) {
+  const showCardActions = () => {
+    return !!card?.memberIds.length || !!card?.comments?.length || !!card?.attachments?.length;
+  };
   return (
     <Card sx={{ cursor: 'pointer', boxShadow: '0 1px 1px rgba(0,0,0,0.2)' }}>
-      <CardMedia
-        sx={{ height: 140 }}
-        image="https://i.pinimg.com/originals/8b/2d/fa/8b2dfa166a9a93243c1c8eb699450e80.jpg"
-        title="green iguana"
-      />
+      {card?.cover && <CardMedia sx={{ height: 140 }} image={card?.cover} title={card.title} />}
+
       <CardContent sx={{ p: 1.5 }}>
-        <Typography sx={{ fontWeight: 'bold' }}>ThanhPhuongDev</Typography>
+        <Typography sx={{ fontWeight: 'bold' }}>{card?.title}</Typography>
       </CardContent>
-      <CardActions sx={{ p: '0px 4px 8px 4px' }}>
-        <Button size="small" startIcon={<GroupIcon></GroupIcon>}>
-          20
-        </Button>
-        <Button size="small" startIcon={<CommentIcon></CommentIcon>}>
-          15
-        </Button>
-        <Button size="small" startIcon={<AttachmentIcon></AttachmentIcon>}>
-          10
-        </Button>
-      </CardActions>
+      {showCardActions() && (
+        <CardActions sx={{ p: '0px 4px 8px 4px' }}>
+          {!!card?.memberIds.length && (
+            <Button size="small" startIcon={<GroupIcon></GroupIcon>}>
+              {card?.memberIds.length}
+            </Button>
+          )}
+          {!!card?.comments?.length && (
+            <Button size="small" startIcon={<CommentIcon></CommentIcon>}>
+              {card?.comments?.length}
+            </Button>
+          )}
+          {!!card?.attachments?.length && (
+            <Button size="small" startIcon={<AttachmentIcon></AttachmentIcon>}>
+              {card?.attachments?.length}
+            </Button>
+          )}
+        </CardActions>
+      )}
     </Card>
   );
 }

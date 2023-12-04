@@ -10,7 +10,8 @@ import FlashOnIcon from '@mui/icons-material/FlashOn';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Tooltip } from '@mui/material';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-function BoardBar() {
+import { capitalizeFirstLetter } from '~/capitalizeFirstLetter';
+function BoardBar({ board }) {
   return (
     <Box
       px={2}
@@ -47,8 +48,8 @@ function BoardBar() {
           }
         }}
       >
-        <Chip icon={<DashboardIcon></DashboardIcon>} label="ThanhPhuongDev" clickable />
-        <Chip icon={<VpnLockIcon></VpnLockIcon>} label="Public/Private Workspace" clickable />
+        <Chip icon={<DashboardIcon></DashboardIcon>} label={board?.title} clickable />
+        <Chip icon={<VpnLockIcon></VpnLockIcon>} label={capitalizeFirstLetter(board?.type)} clickable />
         <Chip icon={<AddToDriveIcon></AddToDriveIcon>} label="Add To Google Drive" clickable />
         <Chip icon={<FlashOnIcon></FlashOnIcon>} label="Automation" clickable />
         <Chip icon={<FilterListIcon></FilterListIcon>} label="Filters" clickable />

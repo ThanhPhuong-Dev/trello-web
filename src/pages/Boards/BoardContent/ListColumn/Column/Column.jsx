@@ -16,7 +16,7 @@ import DragHandleIcon from '@mui/icons-material/DragHandle';
 import { Typography, Box, Tooltip, Button } from '@mui/material';
 import ListCards from './ListCards/ListCards';
 
-function Column() {
+function Column({ column }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -47,7 +47,7 @@ function Column() {
           justifyContent: 'space-between'
         }}
       >
-        <Typography sx={{ fontWeight: 'bold' }}>Column Header</Typography>
+        <Typography sx={{ fontWeight: 'bold' }}>{column?.title}</Typography>
         <Box>
           <Tooltip title="DropDown">
             <ExpandMoreIcon
@@ -110,7 +110,7 @@ function Column() {
       </Box>
 
       {/* List Card */}
-      <ListCards></ListCards>
+      <ListCards cards={column?.cards}></ListCards>
 
       {/* Footer Column */}
       <Box
