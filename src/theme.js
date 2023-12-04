@@ -52,6 +52,11 @@ const theme = extendTheme({
       }
     },
 
+    MuiChipLabel: {
+      styleOverrides: {
+        fontSize: '0.875rem'
+      }
+    },
     MuiButton: {
       styleOverrides: {
         root: {
