@@ -22,7 +22,7 @@ function BoardBar() {
         justifyContent: 'space-between',
         gap: 2,
         overflowX: 'auto',
-        borderBottom: '1px solid #bdc3c7',
+
         bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#0288d1')
       }}
     >
@@ -55,15 +55,25 @@ function BoardBar() {
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        <Button startIcon={<PersonAddIcon></PersonAddIcon>} sx={{ color: 'white' }} variant="outline">
+        <Button
+          startIcon={<PersonAddIcon></PersonAddIcon>}
+          sx={{ color: 'white', border: '1px solid white' }}
+          variant="outlined"
+        >
           Invite
         </Button>
         <AvatarGroup
           max={7}
           sx={{
+            // gap: '10px',
             '& .MuiAvatar-root': {
               width: '34px',
-              height: '34px'
+              height: '34px',
+              fontSize: 16,
+              color: 'white',
+              cursor: 'pointer',
+
+              '&:first-of-type': { bgcolor: '#bdc3c7' }
             }
           }}
         >
