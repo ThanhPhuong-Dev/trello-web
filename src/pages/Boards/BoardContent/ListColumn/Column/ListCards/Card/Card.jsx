@@ -6,12 +6,35 @@ import CardMedia from '@mui/material/CardMedia';
 import GroupIcon from '@mui/icons-material/Group';
 import CommentIcon from '@mui/icons-material/Comment';
 import AttachmentIcon from '@mui/icons-material/Attachment';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+
 function Cards({ card }) {
+  //kéo thả card
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: card?._id,
+    data: { ...card }
+  });
+
+  const dndKitColumnsStyle = {
+    touchAction: 'none',
+    transform: CSS.Translate.toString(transform),
+    transition,
+    opacity: isDragging ? '0.5' : undefined
+  };
+
+  ///show khi có action
   const showCardActions = () => {
     return !!card?.memberIds.length || !!card?.comments?.length || !!card?.attachments?.length;
   };
   return (
-    <Card sx={{ cursor: 'pointer', boxShadow: '0 1px 1px rgba(0,0,0,0.2)' }}>
+    <Card
+      ref={setNodeRef}
+      style={dndKitColumnsStyle}
+      {...attributes}
+      {...listeners}
+      sx={{ cursor: 'pointer', boxShadow: '0 1px 1px rgba(0,0,0,0.2)' }}
+    >
       {card?.cover && <CardMedia sx={{ height: 140 }} image={card?.cover} title={card.title} />}
 
       <CardContent sx={{ p: 1.5 }}>
