@@ -10,7 +10,7 @@ import FlashOnIcon from '@mui/icons-material/FlashOn';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Tooltip } from '@mui/material';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import { capitalizeFirstLetter } from '~/capitalizeFirstLetter';
+import { capitalizeFirstLetter } from '~/utils/capitalizeFirstLetter';
 function BoardBar({ board }) {
   return (
     <Box
