@@ -20,7 +20,8 @@ function Cards({ card }) {
     touchAction: 'none',
     transform: CSS.Translate.toString(transform),
     transition,
-    opacity: isDragging ? '0.5' : undefined
+    opacity: isDragging ? '0.5' : undefined,
+    order: isDragging ? '1px solid #ecf0f1' : undefined
   };
 
   ///show khi có action
