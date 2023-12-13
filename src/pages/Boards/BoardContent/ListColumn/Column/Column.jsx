@@ -18,7 +18,8 @@ import ListCards from './ListCards/ListCards';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-function Column({ column }) {
+function Column({ column}) {
+
   // drag and drog columns
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: column._id,
