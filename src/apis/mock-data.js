@@ -6,11 +6,11 @@ export const mockData = {
   board: {
     _id: 'board-id-01',
     title: 'ThanhPhuongDev',
-    description: 'Pro MERN stack Course',
+    description: 'thanhphuong212002@gmail.com',
     type: 'public', // 'private'
     ownerIds: [], // Những users là Admin của board
     memberIds: [], // Những users là member bình thường của board
-    columnOrderIds: ['column-id-01', 'column-id-02', 'column-id-03'], // Thứ tự sắp xếp / vị trí của các Columns trong 1 boards
+    columnOrderIds: ['column-id-01', 'column-id-02', 'column-id-03', 'column-id-04'], // Thứ tự sắp xếp / vị trí của các Columns trong 1 boards
     columns: [
       {
         _id: 'column-id-01',
@@ -33,7 +33,7 @@ export const mockData = {
             title: 'Title of card 01',
             description: 'Markdown Syntax (sẽ ở khóa nâng cao nhé)',
             cover:
-              'https://trungquandev.com/wp-content/uploads/2022/07/fair-mern-stack-advanced-banner-trungquandev.jpg',
+              'https://scontent.fdad2-1.fna.fbcdn.net/v/t39.30808-6/410878913_2666983156802752_5982141437299026082_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=c42490&_nc_ohc=6iYHMHAcFqkAX-NB12B&_nc_ht=scontent.fdad2-1.fna&oh=00_AfCLZ0haWxys1XJJNQOIgsGE_Q07CKY5Xvkw6Yc9Y7ubeQ&oe=65816ED4',
             memberIds: ['test-user-id-01'],
             comments: ['test comment 01', 'test comment 02'],
             attachments: ['test attachment 01', 'test attachment 02', 'test attachment 03']
@@ -185,6 +185,20 @@ export const mockData = {
             memberIds: [],
             comments: [],
             attachments: []
+          }
+        ]
+      },
+      {
+        _id: 'column-id-04',
+        boardId: 'board-id-01',
+        title: 'Done Column 04',
+        cardOrderIds: ['column-id-04-placeholder-card'],
+        cards: [
+          {
+            _id: 'column-id-04-placeholder-card',
+            boardId: 'board-id-01',
+            columnId: 'column-id-04',
+            FE_PlaceholderCard: true
           }
         ]
       }

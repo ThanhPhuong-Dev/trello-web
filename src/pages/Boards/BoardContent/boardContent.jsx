@@ -10,13 +10,18 @@ import {
   TouchSensor,
   DragOverlay,
   defaultDropAnimationSideEffects,
-  closestCorners
+  closestCorners,
+  closestCenter,
+  pointerWithin,
+  rectIntersection,
+  getFirstCollision
 } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
-import { useEffect, useState } from 'react';
-import { cloneDeep } from 'lodash';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { cloneDeep, isEmpty } from 'lodash';
 import Column from './ListColumn/Column/Column';
 import Cards from './ListColumn/Column/ListCards/Card/Card';
+import { generatePlaceHolderCard } from '~/utils/capitalizeFirstLetter';
 
 const ACTIVE_DARG_ITEM_TYPE = {
   columns: 'ACTIVE_DARG_ITEM_TYPE_COLUMNS',
@@ -31,6 +36,7 @@ function BoardContent({ board }) {
   const [activeDragData, setActiveDragData] = useState(null);
   const [oldColumnsDragingCard, setOldColumnsDragingCard] = useState(null);
 
+  const lastOverId = useRef();
   // điều chỉnh rơ của chuột từ moblie đồng bộ với pc
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
@@ -61,8 +67,9 @@ function BoardContent({ board }) {
   ) => {
     setOrderedColumns((prev) => {
       //nơi mà active card sắp được thả
+      
       const overCardIdenx = overColumn?.cards.findIndex((card) => card._id === overDragId);
-
+      console.log(overCardIdenx);
       //logic tính toán cardIndex mới (trên dưới card OverCard ) lấy chuẩn từ code của thư viện
       let newCardIdex;
       const isBelowOverItem =
@@ -77,8 +84,15 @@ function BoardContent({ board }) {
       //columns cũ
       if (nextActiveColumn) {
         ///xóa card ra khỏi column cũ
+
         nextActiveColumn.cards = nextActiveColumn.cards.filter((card) => card._id !== activeDragCardId);
-        nextActiveColumn.columnOrderIds = nextActiveColumn.cards.map((card) => card._id);
+
+        //thêm placeholderCard nếu card là mảng rỗng
+        if (isEmpty(nextActiveColumn.cards)) {
+          nextActiveColumn.cards = [generatePlaceHolderCard(nextActiveColumn)];
+        }
+
+        nextActiveColumn.cardOrderIds = nextActiveColumn.cards.map((card) => card._id);
       }
 
       //column mới
@@ -93,10 +107,12 @@ function BoardContent({ board }) {
         };
 
         nextOverColumn.cards = nextOverColumn.cards.toSpliced(newCardIdex, 0, rebuild_activeDragCardData);
-        //cập nhật lại mảng cardOrderIds cho chuẩn dữ liệu
-        nextOverColumn.columnOrderIds = nextOverColumn.cards.map((card) => card._id);
-      }
 
+        //nếu có card placeholder thì xóa nó
+        nextOverColumn.cards.filter((card) => !card?.FE_placeholderCard);
+        //cập nhật lại mảng cardOrderIds cho chuẩn dữ liệu
+        nextOverColumn.cardOrderIds = nextOverColumn.cards.map((card) => card._id);
+      }
       return nextColumns;
     });
   };
@@ -233,12 +249,48 @@ function BoardContent({ board }) {
     })
   };
 
+  //hàm fix bug đưa card giữa 2 column khác nhau xảy giật thuật toán va chạm
+  const collisionDetectionStrategy = useCallback(
+    (args) => {
+      if (activeDragType === ACTIVE_DARG_ITEM_TYPE.columns) {
+        return closestCorners({ ...args });
+      }
+
+      // tìm các điểm giao nhau , va chạm -intersections với con trỏ
+      const pointerIntersections = pointerWithin(args);
+      if (!pointerIntersections?.length) return;
+      //thuật toán va chạm
+      const intersections = !!pointerIntersections?.length ? pointerIntersections : rectIntersection(args);
+
+      let overId = getFirstCollision(intersections, 'id');
+
+      if (overId) {
+        const checkColumn = orderedColumns.find((column) => column._id === overId);
+        if (checkColumn) {
+          overId = closestCenter({
+            ...args,
+            droppableContainers: args.droppableContainers.filter((container) => {
+              return container.id != overId && checkColumn?.cardOrderIds?.includes(container.id);
+            })
+          })[0]?.id;
+        }
+
+        lastOverId.current = overId;
+        return [{ id: overId }];
+      }
+
+      return lastOverId.current ? [{ id: lastOverId.current }] : [];
+    },
+    [activeDragType, orderedColumns]
+  );
   return (
     <DndContext
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       onDragOver={handleDragOver}
-      collisionDetection={closestCorners}
+      //giùm cái closestCorners thì sẽ lỗi bug là kéo card giữa 2 columns nó bug
+      // collisionDetection={closestCorners}
+      collisionDetection={collisionDetectionStrategy}
       sensors={sensor}
     >
       <Box
